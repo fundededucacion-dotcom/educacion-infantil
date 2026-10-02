@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuidado de niños en edad preescolar y escolar: bienestar y aprendizaje</title>
+<style>
+:root{--ink:#17323d;--mute:#4d6a75;--brand:#0e6377;--brand2:#0a4a5a;--sun:#f2b134;--bg:#f4f9fa;--line:#d5e4e8;--tip:#e6f5f1;--tipb:#2a9d8f;--warn:#fff3d6;--warnb:#d99a00}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;font:16px/1.65 "Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:"Trebuchet MS","Segoe UI",sans-serif;line-height:1.2;margin:0 0 .6em}
+a{color:var(--brand)}:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+aside{position:fixed;inset:0 auto 0 0;width:256px;background:var(--brand2);color:#fff;padding:22px 18px;display:flex;flex-direction:column;gap:14px;overflow:auto;z-index:5}
+aside strong{font:700 17px/1.3 "Trebuchet MS",sans-serif}
+aside nav{display:flex;flex-direction:column;gap:4px}
+aside nav a{color:#e3f1f4;text-decoration:none;padding:10px 12px;border-radius:10px;font-size:15px;display:flex;gap:8px;align-items:center}
+aside nav a:hover{background:rgba(255,255,255,.12)}
+aside nav a.ok::after{content:"✓";margin-left:auto;background:var(--sun);color:#3a2a00;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:12px;font-weight:700}
+.prog{background:rgba(255,255,255,.18);border-radius:99px;height:8px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--sun);transition:width .4s}
+#pt{font-size:13px;color:#cfe6eb}
+main{margin-left:256px;padding:0 clamp(16px,4vw,48px) 60px;max-width:1100px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:44px 0 28px}
+.hero h1{font-size:clamp(28px,4vw,44px);color:var(--brand2)}.hero p{color:var(--mute);font-size:18px;max-width:56ch}
+.hero svg{width:100%;height:auto}
+.btn{font:600 14px "Segoe UI",sans-serif;border:2px solid var(--brand);background:#fff;color:var(--brand);padding:8px 14px;border-radius:10px;cursor:pointer}
+.btn:hover{background:var(--brand);color:#fff}.btn.pri{background:var(--brand);color:#fff}
+.mod{background:#fff;border:1px solid var(--line);border-radius:16px;margin:26px 0;overflow:hidden}
+.mod.ok{border-color:var(--tipb)}
+.mod>header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px 22px;background:#eaf4f6;border-bottom:1px solid var(--line)}
+.mod>header h2{margin:0;font-size:clamp(20px,2.6vw,26px);color:var(--brand2)}
+.mod>header div{display:flex;gap:8px;flex-wrap:wrap}
+.mod.ok .done{background:var(--tipb);border-color:var(--tipb);color:#fff}
+.body{padding:8px 22px 24px}.body[hidden]{display:none}
+h3{font-size:20px;color:var(--brand);margin-top:1.4em}
+ul,ol{padding-left:1.3em}li{margin:.25em 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fbfdfd}.card h4{margin:0 0 6px;color:var(--brand2)}
+.tip,.warn{border-left:5px solid var(--tipb);background:var(--tip);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.warn{border-color:var(--warnb);background:var(--warn)}
+.tw{overflow-x:auto;margin:12px 0}table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--brand);color:#fff}tbody tr:nth-child(even){background:#f3f9fa}
+details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fff}summary{cursor:pointer;padding:11px 14px;font-weight:600;color:var(--brand2)}details>div{padding:0 16px 12px}
+dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 22px}dt{font-weight:700;color:var(--brand2)}dd{margin:0 0 6px;color:var(--mute);font-size:15px}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer}.chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--brand)}
+@media(max-width:860px){aside{position:sticky;width:auto;inset:0 0 auto 0;flex-direction:row;align-items:center;padding:10px 12px;gap:10px}aside strong,#pt{display:none}aside nav{flex-direction:row;overflow-x:auto;flex:1}aside nav a{white-space:nowrap;padding:8px 10px}.prog{width:60px;flex:none}main{margin-left:0}.hero{grid-template-columns:1fr}}
+@media print{aside,.btn,.hero svg{display:none}main{margin:0}.body[hidden]{display:block}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<aside>
+<strong>Cuidado infantil: bienestar y aprendizaje</strong>
+<nav aria-label="Módulos del curso">
+<a href="#m1" data-m="m1">Módulo 1: Fundamentos</a>
+<a href="#m2" data-m="m2">Módulo 2: Entorno y herramientas</a>
+<a href="#m3" data-m="m3">Módulo 3: Aplicación práctica</a>
+<a href="#m4" data-m="m4">Módulo 4: Proyecto final</a>
+<a href="#m5" data-m="m5">Módulo 5: Recursos y cierre</a>
+</nav>
+<div class="prog" role="progressbar" aria-label="Progreso del curso"><i id="bar"></i></div><div id="pt">0 de 5 módulos completados</div>
+</aside>
+<main>
+<section class="hero">
+<div>
+<h1>Cuidado de niños en edad preescolar y escolar</h1>
+<p>Aprende a cuidar a niños de 3 a 12 años cuidando a la vez su bienestar emocional, físico y su aprendizaje. Cinco módulos, ejercicios con solución y un proyecto final.</p>
+<p><a class="btn pri" href="#m1" style="text-decoration:none;display:inline-block">Empezar el curso</a> <button class="btn" id="all">Desplegar / plegar todo</button> <button class="btn" onclick="print()">Imprimir o guardar PDF</button></p>
+</div>
+<svg viewBox="0 0 320 220" role="img" aria-label="Ilustración de bloques de colores apilados, un libro y un sol">
+<circle cx="258" cy="52" r="30" fill="#f2b134"/><g stroke="#f2b134" stroke-width="5" stroke-linecap="round"><path d="M258 8v10M258 86v10M214 52h10M292 52h10M227 21l7 7M282 76l7 7M289 21l-7 7M234 76l-7 7"/></g>
+<rect x="10" y="196" width="300" height="10" rx="5" fill="#0a4a5a"/>
+<rect x="40" y="146" width="50" height="50" rx="6" fill="#e76f51"/><text x="65" y="182" text-anchor="middle" font-size="30" font-weight="700" fill="#fff" font-family="Trebuchet MS">A</text>
+<rect x="95" y="146" width="50" height="50" rx="6" fill="#2a9d8f"/><text x="120" y="182" text-anchor="middle" font-size="30" font-weight="700" fill="#fff" font-family="Trebuchet MS">B</text>
+<rect x="67" y="96" width="50" height="50" rx="6" fill="#0e6377"/><text x="92" y="132" text-anchor="middle" font-size="30" font-weight="700" fill="#fff" font-family="Trebuchet MS">1</text>
+<path d="M180 196l48-8 48 8v-14l-48-8-48 8z" fill="#fff" stroke="#0a4a5a" stroke-width="3"/><path d="M228 188v-14" stroke="#0a4a5a" stroke-width="3"/>
+<circle cx="205" cy="150" r="14" fill="#f4c7a1"/><path d="M190 196c0-22 10-34 15-34s15 12 15 34z" fill="#e76f51"/>
+</svg>
+</section>
+
+<section class="mod" id="m1"><header><h2>Módulo 1: Fundamentos e introducción</h2><div><button class="btn done">Marcar completado</button><button class="btn tg" aria-expanded="true">Plegar</button></div></header><div class="body">
+<h3>Objetivos de aprendizaje clave</h3>
+<ul><li>Describir las etapas del desarrollo infantil entre los 3 y los 12 años.</li><li>Explicar cómo se relacionan el bienestar y el aprendizaje.</li><li>Identificar las necesidades físicas, emocionales y sociales de cada edad.</li><li>Reconocer el rol del adulto cuidador como guía y figura de seguridad.</li></ul>
+<h3>Conceptos básicos y marco teórico</h3>
+<p><b>Bienestar infantil</b> es el estado en que el niño se siente seguro, sano, querido y con capacidad de participar. <b>Aprendizaje</b> es el proceso por el que construye conocimientos, habilidades y hábitos. Ambos se alimentan mutuamente: un niño con hambre, sueño o miedo aprende menos.</p>
+<div class="tw"><table><thead><tr><th>Autor</th><th>Idea central</th><th>Qué significa para el cuidador</th></tr></thead><tbody>
+<tr><td>Piaget</td><td>El pensamiento evoluciona por etapas (preoperacional, operaciones concretas).</td><td>Usa objetos reales y ejemplos concretos antes de ideas abstractas.</td></tr>
+<tr><td>Vygotsky</td><td>Se aprende con ayuda de otros, en la zona de desarrollo próximo.</td><td>Ofrece apoyo justo y retíralo poco a poco.</td></tr>
+<tr><td>Erikson</td><td>Cada etapa trae un reto emocional (iniciativa, laboriosidad).</td><td>Elogia el esfuerzo y deja que elijan y prueben.</td></tr>
+<tr><td>Maslow</td><td>Primero se cubren necesidades básicas y de seguridad.</td><td>Asegura comida, descanso y afecto antes de exigir atención.</td></tr>
+<tr><td>Bronfenbrenner</td><td>El niño crece dentro de sistemas: familia, escuela, comunidad.</td><td>Coordina con familia y escuela.</td></tr></tbody></table></div>
+<h3>Importancia del tema</h3>
+<p>Los primeros doce años sientan las bases de la salud, las emociones y el rendimiento escolar. Un cuidado atento previene problemas y fortalece la autoestima y la autonomía.</p>
+<h3>Ejemplos conceptuales</h3>
+<div class="grid"><div class="card"><h4>Rutina predecible</h4>Marta (4 años) se calma cuando ve un cartel con el orden del día: llegada, juego, merienda, siesta. Saber lo que viene da seguridad.</div><div class="card"><h4>Juego con propósito</h4>Contar bloques al construir una torre enseña números sin que el niño lo viva como lección.</div><div class="card"><h4>Validar emociones</h4>"Veo que estás enfadado porque se acabó el recreo." Nombrar la emoción ayuda a regularla.</div></div>
+<div class="tip"><b>Consejo:</b> antes de corregir una conducta, pregúntate qué necesidad hay detrás: sueño, hambre, atención o miedo.</div>
+</div></section>
+
+<section class="mod" id="m2"><header><h2>Módulo 2: Configuración del entorno y herramientas base</h2><div><button class="btn done">Marcar completado</button><button class="btn tg" aria-expanded="true">Plegar</button></div></header><div class="body">
+<h3>Requisitos previos y herramientas necesarias</h3>
+<div class="tw"><table><thead><tr><th>Herramienta</th><th>Para qué sirve</th><th>Edad recomendada</th></tr></thead><tbody>
+<tr><td>Horario visual con imágenes</td><td>Anticipar la rutina y reducir ansiedad.</td><td>3-7 años</td></tr>
+<tr><td>Botiquín de primeros auxilios</td><td>Atender golpes y heridas leves.</td><td>Todas</td></tr>
+<tr><td>Materiales de juego libre (bloques, plastilina, disfraces)</td><td>Creatividad, motricidad, lenguaje.</td><td>3-8 años</td></tr>
+<tr><td>Libros, cuadernos y rincón de lectura</td><td>Hábito lector y estudio.</td><td>5-12 años</td></tr>
+<tr><td>Ficha de contacto y salud</td><td>Alergias, medicación y teléfonos de emergencia.</td><td>Todas</td></tr></tbody></table></div>
+<ul><li>Conocer las normas legales y de protección infantil de tu país.</li><li>Tener formación básica en primeros auxilios pediátricos.</li><li>Acordar horarios, alimentación y normas con las familias.</li></ul>
+<h3>Paso a paso para preparar el entorno</h3>
+<ol><li><b>Revisa la seguridad:</b> enchufes cubiertos, esquinas protegidas, productos de limpieza bajo llave.</li><li><b>Define zonas:</b> juego, lectura tranquila, trabajo y descanso.</li><li><b>Crea el horario visual</b> con dibujos y colócalo a la altura de los niños.</li><li><b>Prepara el botiquín y la ficha de cada niño</b> en un lugar accesible.</li><li><b>Pacta las normas</b> con los niños, con frases cortas y positivas.</li></ol>
+<h3>Buenas prácticas recomendadas</h3>
+<ul><li>Mantén la rutina estable y avisa de los cambios con antelación.</li><li>Ofrece elecciones limitadas ("¿rojo o azul?").</li><li>Reserva tiempo diario para juego libre y movimiento.</li><li>Comunícate con las familias de forma breve y frecuente.</li></ul>
+<div class="warn"><b>Atención:</b> nunca dejes a un niño pequeño sin supervisión en agua, cocina, escaleras o con objetos pequeños que pueda tragar.</div>
+</div></section>
+
+<section class="mod" id="m3"><header><h2>Módulo 3: Aplicación práctica y pasos intermedios</h2><div><button class="btn done">Marcar completado</button><button class="btn tg" aria-expanded="true">Plegar</button></div></header><div class="body">
+<h3>Caso de estudio</h3>
+<div class="card"><h4>Lucas, 5 años, llora al llegar al centro</h4>Cada mañana se aferra a su madre y tarda 20 minutos en calmarse. Después participa con normalidad. Las familias piden consejo y el equipo duda si "mimarlo" o ser más firme.</div>
+<h3>Ejercicios guiados con resolución</h3>
+<details><summary>Ejercicio 1: diseñar un ritual de despedida</summary><div><p><b>Pasos:</b> 1) identifica qué necesita Lucas (seguridad y previsibilidad); 2) acuerda con la familia una despedida corta; 3) practícala varios días.</p><p><b>Resolución:</b> ritual de tres gestos (abrazo, frase fija "volveré después de la merienda", choque de manos), entrega de Lucas a un adulto de referencia y salida sin alargar la despedida. En 2 semanas el llanto suele reducirse.</p></div></details>
+<details><summary>Ejercicio 2: convertir los deberes en aprendizaje</summary><div><p><b>Situación:</b> Ana (8 años) se bloquea con las tablas de multiplicar.</p><p><b>Resolución:</b> 1) sesiones de 15 minutos tras la merienda; 2) usar objetos (agrupar garbanzos de 3 en 3); 3) juego de cartas con tablas; 4) elogiar el esfuerzo, no solo el acierto; 5) revisar avances cada semana.</p></div></details>
+<details><summary>Ejercicio 3: gestionar una rabieta</summary><div><p><b>Resolución:</b> 1) asegura que el niño no se haga daño; 2) mantén la calma y habla bajo; 3) nombra la emoción; 4) espera sin ceder a la demanda; 5) cuando se calme, habla de qué hacer la próxima vez.</p></div></details>
+<h3>Errores comunes y cómo evitarlos</h3>
+<div class="tw"><table><thead><tr><th>Error</th><th>Por qué ocurre</th><th>Cómo evitarlo</th></tr></thead><tbody>
+<tr><td>Etiquetar ("es un vago")</td><td>Se busca explicar la conducta rápido.</td><td>Describe la conducta, no al niño.</td></tr>
+<tr><td>Comparar con otros niños</td><td>Se confunde motivar con presionar.</td><td>Compara solo con su propio progreso.</td></tr>
+<tr><td>Cambiar las normas a diario</td><td>Falta de acuerdo entre adultos.</td><td>Pactar pocas normas y mantenerlas.</td></tr>
+<tr><td>Exceso de pantallas o actividades</td><td>Comodidad o agenda saturada.</td><td>Limitar pantallas y dejar tiempo libre.</td></tr>
+<tr><td>Ignorar las emociones</td><td>"No es para tanto".</td><td>Escuchar, nombrar y acompañar.</td></tr></tbody></table></div>
+<div class="tip"><b>Consejo:</b> si una conducta preocupante dura semanas o hay señales de sufrimiento, consulta con pediatría o psicología infantil.</div>
+</div></section>
+
+<section class="mod" id="m4"><header><h2>Módulo 4: Proyecto final e integración</h2><div><button class="btn done">Marcar completado</button><button class="btn tg" aria-expanded="true">Plegar</button></div></header><div class="body">
+<h3>Enunciado del proyecto</h3>
+<p><b>Plan semanal de bienestar y aprendizaje</b> para un niño o grupo real (o ficticio) de entre 3 y 12 años. Debe incluir: perfil del niño o grupo, horario semanal, tres actividades de aprendizaje, tres de bienestar emocional, un plan de seguridad y un plan de comunicación con la familia. Extensión: 4 a 6 páginas.</p>
+<h3>Rúbrica de autoevaluación</h3>
+<div class="tw"><table><thead><tr><th>Criterio</th><th>Excelente (4)</th><th>Bueno (3)</th><th>En desarrollo (2)</th><th>Inicial (1)</th></tr></thead><tbody>
+<tr><td>Análisis del perfil</td><td>Describe edad, necesidades y contexto con detalle.</td><td>Describe lo esencial.</td><td>Datos incompletos.</td><td>Sin análisis.</td></tr>
+<tr><td>Coherencia con teoría</td><td>Justifica cada decisión con un autor o concepto.</td><td>Justifica la mayoría.</td><td>Justifica poco.</td><td>No justifica.</td></tr>
+<tr><td>Equilibrio bienestar-aprendizaje</td><td>Ambos bien integrados en la semana.</td><td>Ligero desequilibrio.</td><td>Predomina uno.</td><td>Solo uno.</td></tr>
+<tr><td>Seguridad y comunicación</td><td>Plan claro y realista.</td><td>Plan correcto, poco detallado.</td><td>Plan parcial.</td><td>Ausente.</td></tr>
+<tr><td>Presentación</td><td>Clara, ordenada y sin errores.</td><td>Ordenada con fallos leves.</td><td>Desordenada.</td><td>Difícil de seguir.</td></tr></tbody></table></div>
+<p><b>Puntuación:</b> 18-20 excelente · 14-17 buen trabajo · 10-13 revisa los puntos débiles · menos de 10 repite el módulo.</p>
+<h3>Guía de ejecución y entrega</h3>
+<ol><li>Elige el niño o grupo y anota edad, intereses y necesidades.</li><li>Define dos objetivos de bienestar y dos de aprendizaje.</li><li>Construye el horario semanal con rutinas fijas y tiempo de juego libre.</li><li>Redacta las seis actividades con materiales y duración.</li><li>Añade el plan de seguridad y el de comunicación con la familia.</li><li>Autoevalúate con la rúbrica, corrige y entrega en PDF.</li></ol>
+</div></section>
+
+<section class="mod" id="m5"><header><h2>Módulo 5: Recursos adicionales y cierre</h2><div><button class="btn done">Marcar completado</button><button class="btn tg" aria-expanded="true">Plegar</button></div></header><div class="body">
+<h3>Resumen de aprendizajes clave</h3>
+<ul><li>El bienestar es la base del aprendizaje.</li><li>Las rutinas predecibles dan seguridad.</li><li>Los niños aprenden jugando y con apoyo gradual.</li><li>Nombrar las emociones ayuda a regularlas.</li><li>Las normas claras y pocas funcionan mejor.</li><li>La colaboración con la familia mejora todos los resultados.</li></ul>
+<h3>Glosario de términos</h3>
+<dl>
+<div><dt>Apego</dt><dd>Vínculo afectivo con una figura de cuidado que da seguridad.</dd></div>
+<div><dt>Autonomía</dt><dd>Capacidad de hacer cosas por uno mismo según la edad.</dd></div>
+<div><dt>Autorregulación</dt><dd>Habilidad de manejar emociones y conducta.</dd></div>
+<div><dt>Andamiaje</dt><dd>Ayuda temporal que se retira según el niño avanza.</dd></div>
+<div><dt>Aprendizaje significativo</dt><dd>Aprendizaje que conecta con lo que el niño ya sabe.</dd></div>
+<div><dt>Desarrollo psicomotor</dt><dd>Evolución del movimiento y la coordinación.</dd></div>
+<div><dt>Empatía</dt><dd>Capacidad de comprender lo que siente otro.</dd></div>
+<div><dt>Escucha activa</dt><dd>Atender con atención plena sin interrumpir ni juzgar.</dd></div>
+<div><dt>Función ejecutiva</dt><dd>Planificar, atender y controlar impulsos.</dd></div>
+<div><dt>Inteligencia emocional</dt><dd>Reconocer, expresar y manejar emociones.</dd></div>
+<div><dt>Juego simbólico</dt><dd>Juego de imaginar roles y situaciones.</dd></div>
+<div><dt>Límites</dt><dd>Normas que protegen y orientan la conducta.</dd></div>
+<div><dt>Motricidad fina / gruesa</dt><dd>Movimientos precisos (escribir) o amplios (correr).</dd></div>
+<div><dt>Refuerzo positivo</dt><dd>Reconocer una conducta adecuada para favorecerla.</dd></div>
+<div><dt>Resiliencia</dt><dd>Capacidad de recuperarse de dificultades.</dd></div>
+<div><dt>Rutina</dt><dd>Secuencia estable de actividades diarias.</dd></div>
+<div><dt>Socialización</dt><dd>Aprender normas y formas de relacionarse.</dd></div>
+<div><dt>Transición</dt><dd>Paso de una actividad o lugar a otro.</dd></div>
+<div><dt>Zona de desarrollo próximo</dt><dd>Lo que el niño logra con ayuda y pronto hará solo.</dd></div>
+<div><dt>Crianza positiva</dt><dd>Estilo basado en afecto, límites claros y respeto.</dd></div>
+</dl>
+<h3>Checklists de repaso final</h3>
+<div class="grid"><div class="card chk"><h4>Entorno</h4>
+<label><input type="checkbox"> Espacios revisados y seguros</label><label><input type="checkbox"> Botiquín y fichas listos</label><label><input type="checkbox"> Horario visual colocado</label><label><input type="checkbox"> Zonas de juego y descanso definidas</label></div>
+<div class="card chk"><h4>Día a día</h4>
+<label><input type="checkbox"> Rutina estable respetada</label><label><input type="checkbox"> Juego libre y movimiento diarios</label><label><input type="checkbox"> Emociones nombradas y validadas</label><label><input type="checkbox"> Elogio del esfuerzo</label></div>
+<div class="card chk"><h4>Cierre del curso</h4>
+<label><input type="checkbox"> Proyecto final entregado</label><label><input type="checkbox"> Rúbrica completada</label><label><input type="checkbox"> Glosario repasado</label><label><input type="checkbox"> Plan de comunicación con familias</label></div></div>
+<p><button class="btn pri" onclick="print()">Imprimir o guardar checklists en PDF</button></p>
+</div></section>
+</main>
+<script>
+const mods=[...document.querySelectorAll('.mod')],bar=document.getElementById('bar'),pt=document.getElementById('pt');
+let saved={};try{saved=JSON.parse(localStorage.getItem('cursoInfantil')||'{}')}catch(e){}
+function upd(){let n=0;mods.forEach(m=>{const ok=m.classList.contains('ok');n+=ok;document.querySelector('nav a[data-m="'+m.id+'"]').classList.toggle('ok',ok);m.querySelector('.done').textContent=ok?'Completado ✓':'Marcar completado'});
+bar.style.width=n*20+'%';pt.textContent=n+' de 5 módulos completados';bar.parentNode.setAttribute('aria-valuenow',n*20);
+try{localStorage.setItem('cursoInfantil',JSON.stringify(Object.fromEntries(mods.map(m=>[m.id,m.classList.contains('ok')]))))}catch(e){}}
+mods.forEach(m=>{if(saved[m.id])m.classList.add('ok');
+m.querySelector('.done').onclick=()=>{m.classList.toggle('ok');upd()};
+const t=m.querySelector('.tg'),b=m.querySelector('.body');
+t.onclick=()=>{b.hidden=!b.hidden;t.setAttribute('aria-expanded',!b.hidden);t.textContent=b.hidden?'Desplegar':'Plegar'}});
+let open=true;document.getElementById('all').onclick=()=>{open=!open;mods.forEach(m=>{const b=m.querySelector('.body'),t=m.querySelector('.tg');b.hidden=!open;t.setAttribute('aria-expanded',open);t.textContent=open?'Plegar':'Desplegar'})};
+upd();
+</script>
+</body>
+</html>

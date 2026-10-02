@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso · Cuidado de Niños en Edad Preescolar y Escolar</title>
+<style>
+/* ============================================================
+   VARIABLES Y RESET
+   ============================================================ */
+:root{
+  --primary:#0f766e;
+  --primary-600:#0d9488;
+  --primary-100:#ccfbf1;
+  --primary-50:#f0fdfa;
+  --accent:#f59e0b;
+  --accent-100:#fef3c7;
+  --danger:#dc2626;
+  --danger-100:#fee2e2;
+  --info:#2563eb;
+  --info-100:#dbeafe;
+  --purple:#7c3aed;
+  --bg:#f1f5f9;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 4px 6px -1px rgba(15,23,42,.07), 0 2px 4px -2px rgba(15,23,42,.05);
+  --shadow-md:0 10px 25px -12px rgba(15,23,42,.25);
+  --sidebar-w:300px;
+  --topbar-h:70px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{line-height:1.25;margin:0 0 .5em;letter-spacing:-.02em;font-weight:700}
+p{margin:0 0 1em}
+ul,ol{margin:0 0 1em;padding-left:1.25em}
+li{margin-bottom:.4em}
+a{color:var(--primary);text-decoration:none}
+img,svg{max-width:100%;display:block}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+  background:linear-gradient(175deg,#0d3b38 0%,#0b2430 55%,#0b1a26 100%);
+  color:#e2e8f0;
+  display:flex;flex-direction:column;
+  z-index:60;
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:4px 0 24px -12px rgba(0,0,0,.5);
+}
+.brand{
+  padding:24px 22px 18px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  display:flex;gap:12px;align-items:center;
+}
+.brand-logo{
+  width:44px;height:44px;flex:0 0 44px;border-radius:13px;
+  background:linear-gradient(135deg,#14b8a6,#0f766e);
+  display:grid;place-items:center;font-size:22px;
+  box-shadow:0 6px 18px -6px rgba(20,184,166,.8);
+}
+.brand-txt strong{display:block;font-size:.95rem;color:#fff;letter-spacing:-.01em;line-height:1.2}
+.brand-txt span{font-size:.74rem;color:#7dd3c8;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+
+.side-scroll{flex:1;overflow-y:auto;padding:18px 14px 8px}
+.side-scroll::-webkit-scrollbar{width:7px}
+.side-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:10px}
+
+.nav-label{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#5f8f96;font-weight:700;padding:0 10px;margin:14px 0 8px;
+}
+.nav-link{
+  display:flex;gap:11px;align-items:flex-start;
+  padding:11px 12px;border-radius:11px;margin-bottom:5px;
+  color:#b6c8cd;font-size:.885rem;font-weight:500;
+  border-left:3px solid transparent;
+  transition:.2s;position:relative;
+}
+.nav-link:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-link.active{
+  background:linear-gradient(90deg,rgba(20,184,166,.28),rgba(20,184,166,.06));
+  color:#fff;border-left-color:#2dd4bf;font-weight:600;
+}
+.nav-num{
+  flex:0 0 24px;height:24px;border-radius:8px;
+  background:rgba(255,255,255,.1);color:#cbd5e1;
+  font-size:.72rem;font-weight:700;
+  display:grid;place-items:center;margin-top:1px;
+}
+.nav-link.active .nav-num{background:#14b8a6;color:#062a28}
+.nav-link.done .nav-num{background:#0f766e;color:#a7f3d0}
+.nav-link.done::after{
+  content:"✔";position:absolute;right:12px;top:11px;
+  font-size:.72rem;color:#2dd4bf;font-weight:700;
+}
+.nav-link span.nav-txt{display:block;line-height:1.35}
+
+.side-progress{
+  padding:16px 20px 22px;
+  border-top:1px solid rgba(255,255,255,.09);
+  background:rgba(0,0,0,.18);
+}
+.side-progress h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#5f8f96;margin:0 0 10px}
+.progress-track{
+  height:9px;border-radius:20px;background:rgba(255,255,255,.12);overflow:hidden;margin-bottom:9px;
+}
+.progress-fill{
+  height:100%;width:0%;border-radius:20px;
+  background:linear-gradient(90deg,#2dd4bf,#facc15);
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-txt{font-size:.78rem;color:#9fb6bb;margin:0}
+
+/* ============================================================
+   LAYOUT PRINCIPAL
+   ============================================================ */
+.hamburger{
+  display:none;position:fixed;top:14px;left:14px;z-index:80;
+  width:44px;height:44px;border-radius:13px;border:none;cursor:pointer;
+  background:var(--primary);color:#fff;font-size:1.25rem;
+  box-shadow:var(--shadow-md);
+}
+.overlay{
+  position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);
+  opacity:0;visibility:hidden;transition:.3s;z-index:55;
+}
+.overlay.show{opacity:1;visibility:visible}
+
+.main{
+  margin-left:var(--sidebar-w);
+  min-height:100vh;
+  padding-bottom:60px;
+}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  height:var(--topbar-h);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:18px;
+  padding:0 32px;
+}
+.topbar-info{flex:1;min-width:0}
+.topbar-title{
+  display:block;font-size:.86rem;font-weight:700;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.topbar-sub{font-size:.72rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.topbar-progress{
+  height:6px;border-radius:20px;background:var(--border);overflow:hidden;
+  margin-top:6px;max-width:420px;
+}
+.topbar-progress .progress-fill{background:linear-gradient(90deg,var(--primary-600),var(--accent))}
+.topbar-actions{display:flex;gap:8px;flex:0 0 auto}
+
+.btn{
+  border:none;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;
+  padding:9px 16px;border-radius:10px;transition:.2s;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.btn-ghost{background:#f1f5f9;color:#334155;border:1px solid var(--border)}
+.btn-ghost:hover{background:#e2e8f0}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary-600),var(--primary));
+  color:#fff;box-shadow:0 8px 20px -10px rgba(13,148,136,.9);
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 24px -10px rgba(13,148,136,.9)}
+.btn-done{background:linear-gradient(135deg,#22c55e,#15803d)!important;color:#fff!important}
+.btn-outline{background:#fff;border:2px solid var(--primary);color:var(--primary)}
+.btn-outline:hover{background:var(--primary-50)}
+
+.content{max-width:1080px;margin:0 auto;padding:34px 32px 0}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:linear-gradient(130deg,#0f766e 0%,#115e59 45%,#0b3b48 100%);
+  color:#fff;padding:44px 44px 40px;margin-bottom:38px;
+  box-shadow:var(--shadow-md);
+}
+.hero::after{
+  content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(45,212,191,.35),transparent 65%);
+  top:-180px;right:-120px;
+}
+.hero-inner{position:relative;z-index:2;max-width:660px}
+.hero-tag{
+  display:inline-block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
+  padding:6px 14px;border-radius:20px;margin-bottom:16px;
+}
+.hero h1{font-size:2.1rem;margin-bottom:14px;color:#fff}
+.hero p{color:#c9e9e5;font-size:1rem;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+  padding:7px 15px;border-radius:30px;font-size:.78rem;font-weight:600;color:#e6fffb;
+}
+
+/* ============================================================
+   MÓDULOS
+   ============================================================ */
+.module{
+  background:var(--surface);border-radius:22px;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+  margin-bottom:34px;overflow:hidden;scroll-margin-top:calc(var(--topbar-h) + 18px);
+  transition:box-shadow .3s, border-color .3s;
+}
+.module.completed{border-color:#86efac;box-shadow:0 0 0 3px rgba(34,197,94,.12),var(--shadow)}
+.module-head{padding:30px 34px 24px;border-bottom:1px solid var(--border);position:relative}
+.module-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary-50);color:var(--primary);
+  border:1px solid var(--primary-100);
+  font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;margin-bottom:14px;
+}
+.module.completed .module-badge{background:#dcfce7;color:#15803d;border-color:#86efac}
+.module-head h2{font-size:1.6rem;margin-bottom:8px}
+.module-sub{color:var(--muted);font-size:.94rem;margin:0}
+.module-body{padding:26px 34px 34px}
+
+.illus{
+  width:100%;height:210px;border-radius:16px;overflow:hidden;margin-bottom:26px;
+  box-shadow:var(--shadow);
+}
+.illus svg{width:100%;height:100%;display:block}
+
+/* ACORDEÓN */
+.acc-item{
+  border:1px solid var(--border);border-radius:14px;
+  margin-bottom:12px;overflow:hidden;background:#fff;transition:.25s;
+}
+.acc-item.open{border-color:#99f6e4;box-shadow:0 4px 14px -8px rgba(15,118,110,.35)}
+.acc-head{
+  width:100%;text-align:left;border:none;background:transparent;cursor:pointer;
+  font-family:inherit;font-size:.98rem;font-weight:700;color:var(--text);
+  padding:16px 20px;display:flex;align-items:center;gap:13px;transition:.2s;
+}
+.acc-head:hover{background:var(--primary-50)}
+.acc-item.open .acc-head{background:var(--primary-50);color:var(--primary)}
+.acc-num{
+  flex:0 0 30px;height:30px;border-radius:9px;background:#f1f5f9;color:var(--muted);
+  font-size:.76rem;font-weight:800;display:grid;place-items:center;
+}
+.acc-item.open .acc-num{background:var(--primary);color:#fff}
+.acc-head .chev{margin-left:auto;transition:transform .3s;color:var(--muted);font-size:.9rem}
+.acc-item.open .chev{transform:rotate(180deg);color:var(--primary)}
+.acc-body{display:none;padding:4px 22px 22px;animation:fade .35s ease}
+.acc-item.open .acc-body{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   COMPONENTES DE CONTENIDO
+   ============================================================ */
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:20px;transition:.25s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#cbd5e1}
+.card h4{font-size:.98rem;margin-bottom:8px;display:flex;align-items:center;gap:9px}
+.card p{font-size:.88rem;color:#475569;margin:0}
+.card .ico{
+  width:32px;height:32px;border-radius:10px;display:grid;place-items:center;
+  background:var(--primary-50);color:var(--primary);font-size:.95rem;flex:0 0 32px;
+}
+
+.box{
+  border-radius:14px;padding:18px 20px;margin:18px 0;
+  border-left:5px solid;font-size:.9rem;
+}
+.box strong{display:block;margin-bottom:5px;font-size:.86rem;letter-spacing:.02em}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+.box-tip{background:var(--primary-50);border-color:var(--primary-600);color:#134e4a}
+.box-tip strong{color:var(--primary)}
+.box-warn{background:var(--accent-100);border-color:var(--accent);color:#78350f}
+.box-warn strong{color:#b45309}
+.box-danger{background:var(--danger-100);border-color:var(--danger);color:#7f1d1d}
+.box-danger strong{color:var(--danger)}
+.box-info{background:var(--info-100);border-color:var(--info);color:#1e3a8a}
+.box-info strong{color:var(--info)}
+.box-success{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.box-success strong{color:#15803d}
+
+/* TABLAS */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);margin:18px 0}
+table{width:100%;border-collapse:collapse;font-size:.86rem;background:#fff;min-width:540px}
+thead th{
+  background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;
+  text-align:left;padding:13px 16px;font-weight:700;font-size:.78rem;
+  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
+}
+tbody td{padding:12px 16px;border-top:1px solid var(--border);vertical-align:top;color:#334155}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody tr:hover{background:var(--primary-50)}
+tbody td strong{color:var(--text)}
+
+/* PASOS */
+.steps{counter-reset:step;list-style:none;padding:0;margin:18px 0}
+.steps li{
+  counter-increment:step;position:relative;padding:0 0 22px 58px;
+  border-left:2px dashed #cbd5e1;margin-left:16px;margin-bottom:0;
+}
+.steps li:last-child{border-left-color:transparent;padding-bottom:4px}
+.steps li::before{
+  content:counter(step);
+  position:absolute;left:-17px;top:-2px;
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-600),var(--primary));
+  color:#fff;font-weight:800;font-size:.85rem;
+  display:grid;place-items:center;
+  box-shadow:0 0 0 4px #fff,0 4px 10px -4px rgba(15,118,110,.7);
+}
+.steps li strong{display:block;font-size:.95rem;margin-bottom:3px}
+.steps li p{font-size:.86rem;color:#475569;margin:0}
+
+details{
+  background:#f8fafc;border:1px solid var(--border);border-radius:12px;
+  padding:12px 16px;margin:12px 0;font-size:.88rem;
+}
+details[open]{background:var(--primary-50);border-color:var(--primary-100)}
+summary{
+  cursor:pointer;font-weight:700;color:var(--primary);font-size:.86rem;
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▶";font-size:.65rem;transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+details > *:not(summary){margin-top:10px}
+
+/* LISTAS CON CHECK */
+.checklist{list-style:none;padding:0;margin:14px 0}
+.checklist li{
+  display:flex;gap:11px;align-items:flex-start;
+  padding:10px 14px;background:#f8fafc;border:1px solid var(--border);
+  border-radius:11px;margin-bottom:8px;font-size:.88rem;transition:.2s;
+}
+.checklist li:hover{background:var(--primary-50);border-color:var(--primary-100)}
+.checklist input[type=checkbox]{
+  width:19px;height:19px;accent-color:var(--primary);cursor:pointer;
+  margin-top:2px;flex:0 0 19px;
+}
+.checklist input:checked + span{text-decoration:line-through;color:#94a3b8}
+.checklist-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;margin-bottom:6px;
+}
+.counter{
+  font-size:.76rem;font-weight:700;color:var(--primary);
+  background:var(--primary-50);padding:4px 12px;border-radius:20px;
+  border:1px solid var(--primary-100);white-space:nowrap;
+}
+
+/* BOTÓN COMPLETAR */
+.module-footer{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  flex-wrap:wrap;padding:20px 34px;background:#f8fafc;border-top:1px solid var(--border);
+}
+.module-footer .hint{font-size:.8rem;color:var(--muted);margin:0}
+
+/* GLOSARIO */
+.glossary-term{font-weight:700;color:var(--primary);white-space:nowrap}
+
+/* CIERRE */
+.closing{
+  background:linear-gradient(130deg,#0f766e,#0b3b48);
+  color:#fff;border-radius:20px;padding:38px;text-align:center;margin-top:10px;
+}
+.closing h3{color:#fff;font-size:1.35rem}
+.closing p{color:#c9e9e5;max-width:640px;margin:0 auto 12px}
+
+.footer{
+  text-align:center;padding:36px 20px 10px;color:var(--muted);font-size:.8rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .hamburger{display:grid;place-items:center}
+  .topbar{padding:0 20px 0 70px;height:auto;min-height:var(--topbar-h);flex-wrap:wrap;gap:10px;padding-top:10px;padding-bottom:10px}
+  .topbar-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .content{padding:24px 18px 0}
+  .hero{padding:32px 24px}
+  .hero h1{font-size:1.6rem}
+  .module-head{padding:24px 22px 20px}
+  .module-body{padding:20px 22px 26px}
+  .module-footer{padding:18px 22px}
+}
+@media (max-width:640px){
+  .hero h1{font-size:1.35rem}
+  .hero{padding:26px 20px;border-radius:18px}
+  .module-head h2{font-size:1.25rem}
+  .content{padding:18px 12px 0}
+  .module{border-radius:16px}
+  .module-head{padding:22px 16px 18px}
+  .module-body{padding:16px 16px 22px}
+  .module-footer{padding:16px}
+  .illus{height:150px}
+  .topbar-title{font-size:.78rem}
+  .btn{padding:8px 12px;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-logo">🧸</div>
+    <div class="brand-txt">
+      <strong>Cuidado Infantil Integral</strong>
+      <span>Preescolar &amp; Escolar</span>
+    </div>
+  </div>
+
+  <div class="side-scroll">
+    <p class="nav-label">Contenido del curso</p>
+    <a href="#modulo-1" class="nav-link active"><span class="nav-num">1</span><span class="nav-txt">Fundamentos e Introducción</span></a>
+    <a href="#modulo-2" class="nav-link"><span class="nav-num">2</span><span class="nav-txt">Entorno y Herramientas Base</span></a>
+    <a href="#modulo-3" class="nav-link"><span class="nav-num">3</span><span class="nav-txt">Aplicación Práctica</span></a>
+    <a href="#modulo-4" class="nav-link"><span class="nav-num">4</span><span class="nav-txt">Proyecto Final e Integración</span></a>
+    <a href="#modulo-5" class="nav-link"><span class="nav-num">5</span><span class="nav-txt">Recursos y Cierre</span></a>
+
+    <p class="nav-label">Accesos rápidos</p>
+    <a href="#glosario" class="nav-link"><span class="nav-num">📖</span><span class="nav-txt">Glosario ampliado</span></a>
+    <a href="#checklists" class="nav-link"><span class="nav-num">✅</span><span class="nav-txt">Checklists descargables</span></a>
+  </div>
+
+  <div class="side-progress">
+    <h4>Tu progreso</h4>
+    <div class="progress-track"><div class="progress-fill js-progress-fill"></div></div>
+    <p class="progress-txt js-progress-text">0 de 5 módulos completados (0%)</p>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay"></div>
+<button class="hamburger" id="hamburger" aria-label="Abrir menú">☰</button>
+
+<!-- ============ MAIN ============ -->
+<div class="main">
+
+  <header class="topbar">
+    <div class="topbar-info">
+      <span class="topbar-sub">Módulo actual</span>
+      <span class="topbar-title" id="currentModule">Módulo 1 · Fundamentos e Introducción</span>
+      <div class="topbar-progress"><div class="progress-fill js-progress-fill"></div></div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" id="expandAll">⤢ Expandir todo</button>
+      <button class="btn btn-ghost" id="collapseAll">⤡ Contraer todo</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="hero-tag">Curso completo · 5 módulos</span>
+        <h1>Cuidado de niños en edad preescolar y escolar con enfoque en bienestar y aprendizaje</h1>
+        <p>Aprende a diseñar entornos, rutinas e interacciones que cuiden y, al mismo tiempo, enseñen. Un recorrido práctico desde los fundamentos teóricos hasta un proyecto integrador aplicable a tu contexto real.</p>
+        <div class="hero-chips">
+          <span class="chip">⏱ 12 horas estimadas</span>
+          <span class="chip">🎯 Nivel: iniciación a intermedio</span>
+          <span class="chip">👩‍🏫 Educadores, cuidadores y familias</span>
+          <span class="chip">📜 Certificado de autoevaluación</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MÓDULO 1
+         ============================================================ -->
+    <section class="module" id="modulo-1">
+      <div class="module-head">
+        <span class="module-badge">Módulo 1</span>
+        <h2>Fundamentos e Introducción</h2>
+        <p class="module-sub">Comprende qué significa cuidar con enfoque de bienestar y aprendizaje, y por qué es la base de todo lo demás.</p>
+      </div>
+
+      <div class="module-body">
+        <div class="illus">
+          <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de un libro abierto con una bombilla y figuras infantiles">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0f766e"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="210" fill="url(#g1)"/>
+            <circle cx="556" cy="48" r="30" fill="#fde68a" opacity=".85"/>
+            <circle cx="88" cy="46" r="16" fill="#ffffff" opacity=".25"/>
+            <circle cx="122" cy="66" r="9" fill="#ffffff" opacity=".18"/>
+            <path d="M0 168 Q160 138 320 162 T640 152 V210 H0Z" fill="#ffffff" opacity=".16"/>
+            <!-- Libro abierto -->
+            <g transform="translate(320,150)">
+              <path d="M-110 6 Q-55 -26 0 6 L0 44 Q-55 12 -110 44 Z" fill="#ffffff" opacity=".95"/>
+              <path d="M110 6 Q55 -26 0 6 L0 44 Q55 12 110 44 Z" fill="#ffffff" opacity=".78"/>
+              <rect x="-4" y="2" width="8" height="44" rx="4" fill="#0f766e" opacity=".35"/>
+            </g>
+            <!-- Bombilla -->
+            <g transform="translate(320,58)">
+              <circle r="26" fill="#fef3c7"/>
+              <circle r="26" fill="none" stroke="#fbbf24" stroke-width="4"/>
+              <rect x="-9" y="22" width="18" height="14" rx="4" fill="#94a3b8"/>
+            </g>
+            <!-- Figura izquierda -->
+            <g transform="translate(120,132)">
+              <circle cy="-34" r="22" fill="#fef3c7"/>
+              <path d="M-30 34 Q0 -22 30 34 Z" fill="#fbbf24"/>
+            </g>
+            <!-- Figura derecha -->
+            <g transform="translate(520,132)">
+              <circle cy="-34" r="22" fill="#fce7f3"/>
+              <path d="M-30 34 Q0 -22 30 34 Z" fill="#f472b6"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 1.1 -->
+        <div class="acc-item open">
+          <button class="acc-head"><span class="acc-num">1.1</span> Objetivos de aprendizaje clave <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <p>Al finalizar este módulo, la persona participante será capaz de:</p>
+            <ul>
+              <li><strong>Reconocer</strong> los hitos del desarrollo en la etapa preescolar (3–5 años) y escolar (6–11 años) en las áreas física, cognitiva, socioemocional y del lenguaje.</li>
+              <li><strong>Explicar</strong> por qué el bienestar emocional es una condición previa y no un complemento del aprendizaje.</li>
+              <li><strong>Identificar</strong> los principales referentes teóricos que sustentan el cuidado infantil integral.</li>
+              <li><strong>Diferenciar</strong> el cuidado meramente asistencial del cuidado educativo-integral.</li>
+              <li><strong>Detectar</strong> señales de alerta físicas, emocionales, sociales y cognitivas.</li>
+              <li><strong>Diseñar</strong> interacciones cotidianas breves que integren cuidado y aprendizaje simultáneamente.</li>
+            </ul>
+            <div class="box box-tip">
+              <strong>💡 Consejo de estudio</strong>
+              <p>Antes de avanzar, escribe en una hoja una situación real de tu día a día con niños. La usarás como hilo conductor durante todo el curso.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">1.2</span> Conceptos básicos e importancia del tema <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="grid grid-3">
+              <div class="card">
+                <h4><span class="ico">🤝</span> Cuidado integral</h4>
+                <p>Conjunto de acciones que atienden simultáneamente las necesidades físicas, emocionales, sociales y cognitivas del niño, sin fragmentarlas.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">💚</span> Bienestar</h4>
+                <p>Estado en el que el niño se siente seguro, aceptado, regulado emocionalmente y con energía para explorar y aprender.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">🌱</span> Aprendizaje significativo</h4>
+                <p>Aprendizaje que se ancla en la experiencia, el juego y el vínculo afectivo, y que por ello perdura en el tiempo.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">🏡</span> Ambiente preparado</h4>
+                <p>Espacio ordenado, seguro, accesible y estéticamente cuidado que invita a la autonomía y a la exploración.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">🔁</span> Corresponsabilidad</h4>
+                <p>Reparto de roles entre familia, escuela y comunidad para garantizar continuidad en las pautas de cuidado.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">🧩</span> Desarrollo integral</h4>
+                <p>Progreso articulado de las dimensiones física, cognitiva, lingüística, social y emocional de la persona.</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top:26px;font-size:1.05rem">¿Por qué es importante?</h3>
+            <ul>
+              <li><strong>Ventana de alta plasticidad:</strong> entre los 3 y los 11 años el cerebro construye conexiones a una velocidad que no se repetirá con la misma intensidad.</li>
+              <li><strong>Impacto a largo plazo:</strong> un vínculo seguro en la infancia se asocia a mejor salud mental, mayor persistencia académica y mejores habilidades sociales en la adultez.</li>
+              <li><strong>El bienestar habilita el aprendizaje:</strong> un niño con estrés sostenido tiene menos recursos cognitivos disponibles para atender, memorizar y razonar.</li>
+              <li><strong>Prevención temprana:</strong> detectar dificultades en preescolar reduce significativamente la necesidad de intervenciones complejas en la etapa escolar.</li>
+              <li><strong>Efecto multiplicador:</strong> un adulto cuidador bien formado impacta a decenas de niños y a sus familias.</li>
+            </ul>
+
+            <div class="box box-info">
+              <strong>ℹ️ Idea central del curso</strong>
+              <p>Cuidar y enseñar no son tareas separadas: cada momento de cuidado (comer, vestirse, ordenar, esperar turno) es una oportunidad de aprendizaje socioemocional y cognitivo.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.3 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">1.3</span> Marco teórico de referencia <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <p>Estas son las teorías que sostienen las prácticas que aprenderás. No necesitas memorizarlas: necesitas reconocerlas en tu trabajo cotidiano.</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Referente</th><th>Aporte principal</th><th>Aplicación práctica</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>John Bowlby &amp; Mary Ainsworth</strong></td><td>Teoría del apego: el vínculo seguro con un adulto significativo es la base de la seguridad emocional.</td><td>Saludos personalizados, contacto visual, respuesta consistente ante el llanto o el miedo.</td></tr>
+                  <tr><td><strong>Jean Piaget</strong></td><td>Etapas del desarrollo cognitivo: el niño construye conocimiento actuando sobre el mundo.</td><td>Materiales concretos y manipulables antes que explicaciones abstractas.</td></tr>
+                  <tr><td><strong>Lev Vygotsky</strong></td><td>Zona de Desarrollo Próximo y andamiaje: se aprende con ayuda ajustada.</td><td>Preguntas guía, modelado, retirar la ayuda poco a poco.</td></tr>
+                  <tr><td><strong>Abraham Maslow</strong></td><td>Jerarquía de necesidades: sin seguridad ni pertenencia no hay autorrealización.</td><td>Garantizar hambre, sueño, seguridad y afecto antes de exigir rendimiento.</td></tr>
+                  <tr><td><strong>Urie Bronfenbrenner</strong></td><td>Modelo ecológico: el niño se desarrolla dentro de sistemas que se influyen entre sí.</td><td>Coordinar familia, escuela y comunidad con pautas coherentes.</td></tr>
+                  <tr><td><strong>Maria Montessori</strong></td><td>Ambiente preparado y autonomía: “ayúdame a hacerlo por mí mismo”.</td><td>Muebles a su altura, materiales accesibles, tareas reales adaptadas.</td></tr>
+                  <tr><td><strong>Daniel Goleman</strong></td><td>Inteligencia emocional: reconocer y regular emociones es una habilidad enseñable.</td><td>Nombrar emociones, validar, enseñar estrategias de calma.</td></tr>
+                  <tr><td><strong>Jane Nelsen</strong></td><td>Disciplina positiva: firmeza y amabilidad al mismo tiempo.</td><td>Límites claros con respeto, consecuencias lógicas en lugar de castigos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.4 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">1.4</span> Ejemplos conceptuales claros <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="grid grid-2">
+              <div class="card">
+                <h4><span class="ico">1</span> Cuidado asistencial vs. cuidado integral</h4>
+                <p><strong>Asistencial:</strong> “Le doy la merienda para que no tenga hambre.”<br>
+                <strong>Integral:</strong> “Le doy la merienda, le nombro los alimentos, le pido que reparta los platos y espero su turno con él.”</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">2</span> Bienestar como puerta del aprendizaje</h4>
+                <p>Un niño de 6 años que llega a clase tras una discusión familiar no puede concentrarse: su cerebro está en modo alerta. Primero se regula (acogida, agua, respiración), después se aprende.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">3</span> Andamiaje en acción</h4>
+                <p>Un niño de 4 años no logra cerrar su abrigo. El adulto no lo hace por él: coloca sus manos, guía la primera parte y retira la ayuda cuando el niño lo intenta solo.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">4</span> Ambiente que enseña</h4>
+                <p>Si los materiales están a la altura del niño, se reduce la dependencia del adulto y aumentan la autonomía, la iniciativa y la autorregulación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <p class="hint">Marca este módulo cuando hayas revisado todas sus secciones.</p>
+        <button class="btn btn-primary js-complete">Marcar módulo como completado</button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MÓDULO 2
+         ============================================================ -->
+    <section class="module" id="modulo-2">
+      <div class="module-head">
+        <span class="module-badge">Módulo 2</span>
+        <h2>Configuración del Entorno y Herramientas Base</h2>
+        <p class="module-sub">Prepara el espacio, los materiales y las rutinas que sostendrán todo el proceso de cuidado y aprendizaje.</p>
+      </div>
+
+      <div class="module-body">
+        <div class="illus">
+          <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de un aula preparada con estantería, bloques y alfombra">
+            <defs>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="210" fill="url(#g2)"/>
+            <circle cx="90" cy="46" r="28" fill="#ffffff" opacity=".18"/>
+            <ellipse cx="330" cy="186" rx="200" ry="26" fill="#ffffff" opacity=".28"/>
+            <!-- Estantería -->
+            <rect x="90" y="52" width="190" height="110" rx="12" fill="#ffffff" opacity=".94"/>
+            <rect x="106" y="72" width="70" height="30" rx="7" fill="#fbbf24"/>
+            <rect x="186" y="72" width="34" height="30" rx="7" fill="#34d399"/>
+            <rect x="228" y="72" width="36" height="30" rx="7" fill="#f472b6"/>
+            <rect x="106" y="114" width="46" height="30" rx="7" fill="#60a5fa"/>
+            <rect x="160" y="114" width="52" height="30" rx="7" fill="#fb923c"/>
+          </svg>
+        </div>
+
+        <!-- 2.1 -->
+        <div class="acc-item open">
+          <button class="acc-head"><span class="acc-num">2.1</span> Requisitos previos y herramientas necesarias <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <h4 style="font-size:.95rem">Conocimientos y actitudes previas</h4>
+            <ul>
+              <li>Nociones básicas de desarrollo infantil (las cubriste en el Módulo 1).</li>
+              <li>Capacidad de observación sistemática y registro escrito.</li>
+              <li>Disposición a la paciencia activa: esperar sin intervenir de inmediato.</li>
+              <li>Compromiso con la confidencialidad de la información de los niños y sus familias.</li>
+              <li>Formación básica en primeros auxilios y protocolos de emergencia del centro.</li>
+            </ul>
+
+            <h4 style="font-size:.95rem;margin-top:20px">Herramientas base</h4>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Categoría</th><th>Herramienta / recurso</th><th>Para qué sirve</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Espacio físico</strong></td><td>Zona de movimiento, zona tranquila, zona de trabajo, zona de aseo</td><td>Delimitar funciones y reducir el desorden y los conflictos.</td></tr>
+                  <tr><td><strong>Mobiliario</strong></td><td>Mesas y sillas a la altura del niño, estanterías abiertas, colchonetas</td><td>Favorecer la autonomía y la postura adecuada.</td></tr>
+                  <tr><td><strong>Material didáctico</strong></td><td>Bloques, encajes, letras y números manipulables, rompecabezas graduados</td><td>Aprendizaje concreto y progresivo.</td></tr>
+                  <tr><td><strong>Material de expresión</strong></td><td>Pintura lavable, plastilina, papel grande, tijeras de punta roma</td><td>Desarrollo de motricidad fina y expresión emocional.</td></tr>
+                  <tr><td><strong>Recursos emocionales</strong></td><td>Rincón de la calma, tarjetas de emociones, pelota antiestrés, cuentos</td><td>Autorregulación y nombramiento de emociones.</td></tr>
+                  <tr><td><strong>Registro</strong></td><td>Cuaderno de observación, fichas de seguimiento, tablero de rutinas</td><td>Documentar avances y detectar señales de alerta.</td></tr>
+                  <tr><td><strong>Higiene y seguridad</strong></td><td>Jabón, toallas individuales, botiquín, protectores de enchufes, esquinas redondeadas</td><td>Prevención de accidentes y enfermedades.</td></tr>
+                  <tr><td><strong>Tecnología</strong></td><td>Altavoz para música, tablet de uso guiado y con tiempo limitado</td><td>Apoyo puntual, nunca sustituto de la interacción.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="box box-warn">
+              <strong>⚠️ Antes de empezar</strong>
+              <p>Revisa que el espacio esté libre de objetos pequeños (riesgo de asfixia en menores de 5 años), cables sueltos y superficies calientes. La seguridad no es negociable.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.2 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">2.2</span> Paso a paso: preparación inicial del entorno <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <ol class="steps">
+              <li><strong>Diagnóstico del espacio (Día 1)</strong><p>Recorre el lugar con una lista en mano: identifica riesgos, zonas muertas, fuentes de ruido y puntos de poca visibilidad.</p></li>
+              <li><strong>Definición de zonas (Día 1–2)</strong><p>Marca con cinta de color o muebles las cuatro zonas básicas: movimiento, calma, trabajo y aseo. Que cada zona tenga un nombre visible.</p></li>
+              <li><strong>Ajuste de alturas (Día 2)</strong><p>Verifica que estanterías, perchas y materiales estén al alcance del niño sin necesidad de subirse a nada.</p></li>
+              <li><strong>Selección y rotación de materiales (Día 3)</strong><p>Coloca pocos materiales a la vez (5–7 por zona) y rota cada 2 o 3 semanas para mantener el interés.</p></li>
+              <li><strong>Diseño de rutinas visuales (Día 3–4)</strong><p>Crea un tablero con pictogramas de la secuencia diaria: llegada, asamblea, trabajo, recreo, comida, descanso, cierre.</p></li>
+              <li><strong>Rincón de la calma (Día 4)</strong><p>Habilita un espacio blando, con cojín, cuentos y tarjetas de emociones. No es un castigo: es un lugar de autorregulación.</p></li>
+              <li><strong>Protocolo de seguridad y emergencias (Día 5)</strong><p>Ubica botiquín, extintor y salidas. Ensaya con los niños el simulacro de forma lúdica.</p></li>
+              <li><strong>Comunicación a las familias (Día 5)</strong><p>Envía una nota breve explicando las zonas, rutinas y normas. La coherencia casa–escuela multiplica el efecto.</p></li>
+            </ol>
+
+            <div class="box box-success">
+              <strong>✅ Resultado esperado</strong>
+              <p>Al terminar esta preparación, un niño nuevo debería poder entrar, saber dónde guardar su mochila y encontrar una actividad sin que un adulto se lo indique.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.3 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">2.3</span> Buenas prácticas recomendadas <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="grid grid-2">
+              <div class="card">
+                <h4><span class="ico">✔</span> Sí hacer</h4>
+                <p>• Anticipar los cambios de actividad con avisos de 5 y 2 minutos.<br>
+                • Mantener rutinas estables: la previsibilidad da seguridad.<br>
+                • Hablar a la altura de los ojos del niño.<br>
+                • Describir lo que se observa en lugar de etiquetar (“veo que estás frustrado” en vez de “eres un llorón”).<br>
+                • Permitir el error como parte del aprendizaje.<br>
+                • Rotar materiales y mantener el orden accesible.</p>
+              </div>
+              <div class="card">
+                <h4><span class="ico">✘</span> Evitar</h4>
+                <p>• Cambiar las normas de un día para otro sin explicación.<br>
+                • Usar el rincón de la calma como castigo.<br>
+                • Hablar de un niño delante de él en tercera persona.<br>
+                • Sobreestimular con demasiados materiales u opciones.<br>
+                • Resolver la tarea por el niño cuando ya puede intentarlo.<br>
+                • Comparar a los niños entre sí.</p>
+              </div>
+            </div>
+
+            <div class="box box-tip">
+              <strong>💡 Regla de oro del entorno</strong>
+              <p>Si un adulto tiene que intervenir constantemente para que el espacio funcione, el problema no es el niño: es el diseño del espacio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <p class="hint">Marca este módulo cuando hayas revisado todas sus secciones.</p>
+        <button class="btn btn-primary js-complete">Marcar módulo como completado</button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MÓDULO 3
+         ============================================================ -->
+    <section class="module" id="modulo-3">
+      <div class="module-head">
+        <span class="module-badge">Módulo 3</span>
+        <h2>Aplicación Práctica y Pasos Intermedios</h2>
+        <p class="module-sub">Del concepto a la acción: casos reales, ejercicios guiados y los errores que conviene evitar.</p>
+      </div>
+
+      <div class="module-body">
+        <div class="illus">
+          <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de una tabla de registro con marcas de verificación y un lápiz">
+            <defs>
+              <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#ea580c"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="210" fill="url(#g3)"/>
+            <circle cx="560" cy="50" r="34" fill="#ffffff" opacity=".2"/>
+            <!-- Portapapeles -->
+            <rect x="215" y="30" width="210" height="160" rx="16" fill="#ffffff" opacity=".96"/>
+            <rect x="295" y="18" width="50" height="26" rx="9" fill="#94a3b8"/>
+            <g stroke="#cbd5e1" stroke-width="7" stroke-linecap="round">
+              <line x1="245" y1="78" x2="395" y2="78"/>
+              <line x1="245" y1="110" x2="395" y2="110"/>
+              <line x1="245" y1="142" x2="355" y2="142"/>
+            </g>
+            <g fill="#0f766e">
+              <circle cx="245" cy="78" r="10"/><circle cx="245" cy="110" r="10"/><circle cx="245" cy="142" r="10"/>
+            </g>
+            <g stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none">
+              <path d="M240 78 l4 4 l7 -8"/>
+              <path d="M240 110 l4 4 l7 -8"/>
+              <path d="M240 142 l4 4 l7 -8"/>
+            </g>
+            <!-- Lápiz -->
+            <g transform="translate(455,150) rotate(-35)">
+              <rect x="0" y="0" width="16" height="86" rx="4" fill="#fbbf24"/>
+              <rect x="0" y="0" width="16" height="14" rx="4" fill="#f472b6"/>
+              <path d="M0 86 L8 104 L16 86 Z" fill="#fde68a"/>
+              <path d="M5 96 L8 104 L11 96 Z" fill="#334155"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 3.1 -->
+        <div class="acc-item open">
+          <button class="acc-head"><span class="acc-num">3.1</span> Caso de estudio: “Sofía no quiere separarse de su mamá” <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <p><strong>Contexto.</strong> Sofía tiene 4 años y asiste a un centro de educación inicial desde hace tres semanas. Cada mañana, al llegar, se aferra a la pierna de su madre, llora con intensidad y rechaza entrar al aula. La madre se siente culpable y ha empezado a llegar tarde al trabajo. El personal ha intentado distraerla con juguetes, sin éxito sostenido.</p>
+
+            <p><strong>Observación sistemática (5 días).</strong></p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Elemento observado</th><th>Registro</th></tr></thead>
+                <tbody>
+                  <tr><td>Duración del llanto</td><td>Entre 12 y 20 minutos tras la salida de la madre.</td></tr>
+                  <tr><td>Qué lo reduce</td><td>Que un adulto se siente cerca sin hablarle, con un cuento en la mano.</td></tr>
+                  <tr><td>Qué lo aumenta</td><td>Despedidas largas, varios adultos rodeándola, cambios de rutina.</td></tr>
+                  <tr><td>Estado posterior</td><td>A los 25 minutos participa con normalidad; al final del día está contenta.</td></tr>
+                  <tr><td>Contexto familiar</td><td>Cambio reciente de domicilio; madre con horarios rotativos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="box box-info">
+              <strong>ℹ️ Lectura del caso</strong>
+              <p>No hay un problema de conducta: hay un <strong>período de adaptación</strong> normal en un contexto de cambios. La intervención se centra en tres ejes: <em>previsibilidad</em> (rutina de despedida estable), <em>vínculo</em> (un adulto de referencia fijo) y <em>acompañamiento familiar</em> (pautas claras para la madre).</p>
+            </div>
+
+            <p><strong>Plan de intervención propuesto (2 semanas).</strong></p>
+            <ol class="steps">
+              <li><strong>Ritual de despedida fijo</strong><p>Tres pasos siempre iguales: un abrazo, una frase (“te vengo a buscar después del cuento”) y salida tranquila. Sin alargar.</p></li>
+              <li><strong>Adulto de referencia</strong><p>La misma persona recibe a Sofía cada día y se sienta cerca de ella durante los primeros 10 minutos.</p></li>
+              <li><strong>Objeto de transición</strong><p>Un pequeño objeto de casa que permanece en su casillero durante el día.</p></li>
+              <li><strong>Anticipación visual</strong><p>Se le muestra el tablero de rutinas cada mañana señalando cuándo vuelve la madre.</p></li>
+              <li><strong>Evaluación semanal</strong><p>Se registra la duración del llanto: si baja semana a semana, el plan funciona.</p></li>
+            </ol>
+
+            <div class="box box-success">
+              <strong>✅ Resultado</strong>
+              <p>Al día 12, Sofía llora menos de 3 minutos y entra tomada de la mano de su educadora de referencia. La madre recupera la puntualidad laboral.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">3.2</span> Ejercicios guiados paso a paso <span class="chev">▾</span></button>
+          <div class="acc-body">
+
+            <h4 style="font-size:.95rem">Ejercicio 1 · Diseñar un ritual de bienvenida</h4>
+            <p><strong>Consigna:</strong> diseña una rutina de bienvenida de 3 minutos que puedas aplicar con un grupo de 8 niños de 4 años.</p>
+            <details>
+              <summary>Ver resolución paso a paso</summary>
+              <p><strong>Paso 1.</strong> Definir el objetivo: que cada niño se sienta visto y que el grupo se regule al entrar.</p>
+              <p><strong>Paso 2.</strong> Estructurar tres momentos: (a) saludo personalizado en la puerta con el nombre; (b) el niño coloca su foto en el tablero de “estoy aquí”; (c) toma un cojín y se sienta en el círculo.</p>
+              <p><strong>Paso 3.</strong> Añadir un elemento sensorial estable: la misma canción suave cada día durante la transición.</p>
+              <p><strong>Paso 4.</strong> Prever la excepción: el niño que llega alterado pasa directo al rincón de la calma acompañado por un adulto, sin perder el saludo.</p>
+              <p><strong>Paso 5.</strong> Evaluar: al cabo de una semana, comprobar si el tiempo de transición bajó y si hay menos conflictos en la primera actividad.</p>
+            </details>
+
+            <h4 style="font-size:.95rem;margin-top:22px">Ejercicio 2 · Convertir una tarea de cuidado en aprendizaje</h4>
+            <p><strong>Consigna:</strong> transforma el momento de lavado de manos en una actividad con contenido cognitivo y socioemocional.</p>
+            <details>
+              <summary>Ver resolución paso a paso</summary>
+              <p><strong>Paso 1.</strong> Secuencia motriz: subir mangas, abrir el grifo, frotar, enjuagar, cerrar, secar. Se enseña con pictogramas.</p>
+              <p><strong>Paso 2.</strong> Contenido cognitivo: contar hasta 20 mientras se frota (numeración y ritmo).</p>
+              <p><strong>Paso 3.</strong> Contenido social: turnos y espera; el adulto modela “ahora tú, ahora yo”.</p>
+              <p><strong>Paso 4.</strong> Contenido emocional: nombrar la sensación (“el agua está tibia”, “me siento limpio”).</p>
+              <p><strong>Paso 5.</strong> Autonomía: progresivamente el adulto solo supervisa y verbaliza menos.</p>
+            </details>
+
+            <h4 style="font-size:.95rem;margin-top:22px">Ejercicio 3 · Detectar y responder a una señal de alerta</h4>
+            <p><strong>Consigna:</strong> un niño de 7 años, antes participativo, lleva dos semanas aislado, come poco y evita el recreo. ¿Qué haces?</p>
+            <details>
+              <summary>Ver resolución paso a paso</summary>
+              <p><strong>Paso 1. Observar y registrar</strong> conductas concretas con fecha y hora, sin interpretaciones.</p>
+              <p><strong>Paso 2. Acercarse sin interrogar:</strong> ofrecer un espacio seguro (una actividad compartida, un paseo corto), no un interrogatorio.</p>
+              <p><strong>Paso 3. Validar y nombrar:</strong> “He notado que estás más callado. No tienes que contarme nada, pero estoy aquí.”</p>
+              <p><strong>Paso 4. Comunicar al equipo</strong> y activar el protocolo interno de seguimiento.</p>
+              <p><strong>Paso 5. Contactar a la familia</strong> con tono colaborativo, describiendo hechos y pidiendo su perspectiva.</p>
+              <p><strong>Paso 6. Derivar</strong> si la situación persiste más de 2–3 semanas o si aparecen señales de riesgo físico o emocional grave.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- 3.3 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">3.3</span> Errores comunes y cómo evitarlos <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Error frecuente</th><th>Por qué ocurre</th><th>Cómo evitarlo</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Distraer en lugar de acompañar</strong></td><td>Buscar que el llanto pare rápido.</td><td>Validar la emoción primero: “entiendo que estés triste”, y luego ofrecer una actividad.</td></tr>
+                  <tr><td><strong>Etiquetar al niño</strong></td><td>Comodidad del lenguaje (“es el travieso”).</td><td>Describir la conducta observable, no la identidad.</td></tr>
+                  <tr><td><strong>Sobreestimular con materiales</strong></td><td>Creer que más es mejor.</td><td>Rotar 5–7 materiales por zona y guardar el resto.</td></tr>
+                  <tr><td><strong>Castigar con el rincón de la calma</strong></td><td>Confundirlo con una “silla de pensar”.</td><td>Presentarlo siempre como un lugar voluntario de autorregulación.</td></tr>
+                  <tr><td><strong>Ignorar la señal de alerta por falta de tiempo</strong></td><td>Sobrecarga del adulto.</td><td>Usar una ficha simple de registro y activar el protocolo del centro.</td></tr>
+                  <tr><td><strong>Incoherencia entre adultos</strong></td><td>Cada persona aplica sus propias normas.</td><td>Acordar por escrito 5 normas comunes y revisarlas en reunión breve semanal.</td></tr>
+                  <tr><td><strong>Exigir por encima del desarrollo</strong></td><td>Desconocimiento de los hitos esperables.</td><td>Consultar la tabla de hitos y ajustar la expectativa a la edad real.</td></tr>
+                  <tr><td><strong>Dejar fuera a la familia</strong></td><td>Miedo a la crítica o falta de tiempo.</td><td>Comunicación breve y periódica, centrada en logros y no solo en problemas.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="box box-danger">
+              <strong>🚫 Señales de alerta que requieren derivación inmediata</strong>
+              <p>Lesiones sin explicación coherente, retroceso brusco en el lenguaje o el control de esfínteres, miedo intenso a una persona concreta, aislamiento total, expresiones de autolesión o de no querer vivir. Ante cualquiera de estas, activa el protocolo institucional y consulta con profesionales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <p class="hint">Marca este módulo cuando hayas revisado todas sus secciones.</p>
+        <button class="btn btn-primary js-complete">Marcar módulo como completado</button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MÓDULO 4
+         ============================================================ -->
+    <section class="module" id="modulo-4">
+      <div class="module-head">
+        <span class="module-badge">Módulo 4</span>
+        <h2>Proyecto Final e Integración</h2>
+        <p class="module-sub">Integra todo lo aprendido en un plan aplicable a tu contexto real, con rúbrica de autoevaluación.</p>
+      </div>
+
+      <div class="module-body">
+        <div class="illus">
+          <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de una gráfica de progreso con estrella y medalla">
+            <defs>
+              <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="210" fill="url(#g4)"/>
+            <circle cx="90" cy="50" r="26" fill="#ffffff" opacity=".18"/>
+            <!-- Barras -->
+            <g>
+              <rect x="180" y="132" width="44" height="58" rx="10" fill="#ffffff" opacity=".75"/>
+              <rect x="244" y="104" width="44" height="86" rx="10" fill="#ffffff" opacity=".85"/>
+              <rect x="308" y="76" width="44" height="114" rx="10" fill="#ffffff" opacity=".95"/>
+            </g>
+            <!-- Estrella -->
+            <g transform="translate(440,80)">
+              <path d="M0 -46 L14 -14 L49 -14 L21 6 L32 40 L0 20 L-32 40 L-21 6 L-49 -14 L-14 -14 Z" fill="#fde68a"/>
+            </g>
+            <!-- Línea base -->
+            <rect x="150" y="190" width="240" height="7" rx="4" fill="#ffffff" opacity=".5"/>
+          </svg>
+        </div>
+
+        <!-- 4.1 -->
+        <div class="acc-item open">
+          <button class="acc-head"><span class="acc-num">4.1</span> Enunciado del proyecto integrador <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="box box-info">
+              <strong>📌 Proyecto: “Plan de Bienestar y Aprendizaje (PBA)”</strong>
+              <p>Diseña un plan de <strong>dos semanas</strong> para un grupo real o simulado de niños en edad preescolar o escolar, que integre de forma explícita el cuidado, el bienestar emocional y el aprendizaje.</p>
+            </div>
+
+            <h4 style="font-size:.95rem">El plan debe contener obligatoriamente:</h4>
+            <ul>
+              <li><strong>Ficha de contexto:</strong> edad del grupo, número de niños, características relevantes, contexto familiar general.</li>
+              <li><strong>Mapa del entorno:</strong> descripción de las zonas y su función (movimiento, calma, trabajo, aseo).</li>
+              <li><strong>Rutina diaria visual:</strong> secuencia de la jornada con tiempos aproximados.</li>
+              <li><strong>5 actividades integradoras:</strong> cada una con objetivo de aprendizaje, componente de bienestar y material necesario.</li>
+              <li><strong>Sistema de registro:</strong> qué observarás, con qué instrumento y con qué frecuencia.</li>
+              <li><strong>Plan de comunicación con familias:</strong> dos acciones concretas.</li>
+              <li><strong>Protocolo de señales de alerta:</strong> qué harás y a quién avisarás.</li>
+              <li><strong>Autoevaluación final:</strong> qué funcionó, qué ajustarías y por qué.</li>
+            </ul>
+
+            <h4 style="font-size:.95rem;margin-top:18px">Formato de entrega</h4>
+            <ul>
+              <li>Extensión: 4 a 6 páginas (o presentación equivalente de 10–12 diapositivas).</li>
+              <li>Puede entregarse en PDF, documento de texto o presentación.</li>
+              <li>Lenguaje claro, profesional y libre de etiquetas sobre los niños.</li>
+              <li>Incluir al menos una tabla y un cuadro de registro.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4.2 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">4.2</span> Rúbrica de autoevaluación detallada <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <p>Puntúa tu propio proyecto con honestidad. La rúbrica es una herramienta de mejora, no un examen.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Criterio</th><th>Indicador de logro</th><th>Puntos</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>1. Contexto y diagnóstico</strong></td><td>Describe con precisión el grupo, sus características y necesidades detectadas.</td><td>15</td></tr>
+                  <tr><td><strong>2. Diseño del entorno</strong></td><td>Define zonas con función clara, criterios de seguridad y accesibilidad infantil.</td><td>15</td></tr>
+                  <tr><td><strong>3. Integración cuidado–aprendizaje</strong></td><td>Cada actividad articula explícitamente un objetivo de aprendizaje y un componente de bienestar.</td><td>20</td></tr>
+                  <tr><td><strong>4. Fundamentación teórica</strong></td><td>Cita y aplica al menos tres referentes del Módulo 1 de forma pertinente.</td><td>10</td></tr>
+                  <tr><td><strong>5. Sistema de registro</strong></td><td>Incluye instrumento concreto, frecuencia y criterios observables.</td><td>10</td></tr>
+                  <tr><td><strong>6. Participación de la familia</strong></td><td>Propone dos acciones realistas y respetuosas de comunicación.</td><td>10</td></tr>
+                  <tr><td><strong>7. Protocolo de alerta</strong></td><td>Define pasos claros y responsables ante señales de riesgo.</td><td>10</td></tr>
+                  <tr><td><strong>8. Presentación y lenguaje</strong></td><td>Documento ordenado, claro, sin etiquetas ni juicios sobre los niños.</td><td>10</td></tr>
+                  <tr><td colspan="2" style="text-align:right"><strong>TOTAL</strong></td><td><strong>100</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Puntaje</th><th>Nivel alcanzado</th><th>Interpretación</th></tr></thead>
+                <tbody>
+                  <tr><td>90 – 100</td><td><strong>Excelente</strong></td><td>Plan listo para aplicar. Puedes compartirlo como modelo en tu equipo.</td></tr>
+                  <tr><td>75 – 89</td><td><strong>Bueno</strong></td><td>Sólido, con ajustes menores en registro o fundamentación.</td></tr>
+                  <tr><td>60 – 74</td><td><strong>Suficiente</strong></td><td>Cumple lo básico. Revisa la integración cuidado–aprendizaje.</td></tr>
+                  <tr><td>&lt; 60</td><td><strong>A mejorar</strong></td><td>Repasa los Módulos 1 y 2 antes de rehacer el plan.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4.3 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">4.3</span> Guía paso a paso para la ejecución y entrega <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <ol class="steps">
+              <li><strong>Elige tu contexto (día 1)</strong><p>Puede ser tu grupo real, un grupo que conozcas o un caso simulado descrito con detalle.</p></li>
+              <li><strong>Recoge información (días 2–3)</strong><p>Edades, número de niños, rutinas actuales, espacio disponible, materiales con los que cuentas.</p></li>
+              <li><strong>Diseña el mapa del entorno (día 3)</strong><p>Dibuja las zonas en un croquis simple e indica la función de cada una.</p></li>
+              <li><strong>Construye la rutina diaria (día 4)</strong><p>Define la secuencia con tiempos y momentos de transición explícitos.</p></li>
+              <li><strong>Diseña las 5 actividades (días 4–6)</strong><p>Usa esta plantilla: nombre, objetivo de aprendizaje, componente de bienestar, materiales, duración y cómo se evalúa.</p></li>
+              <li><strong>Crea los instrumentos de registro (día 7)</strong><p>Una tabla simple: fecha, conducta observada, contexto, acción tomada.</p></li>
+              <li><strong>Revisa con la rúbrica (día 8)</strong><p>Autoevalúa, corrige lo que puntúe bajo y redacta tu reflexión final.</p></li>
+              <li><strong>Entrega y comparte (día 9)</strong><p>Entrega el documento y, si es posible, compártelo con un colega para recibir retroalimentación.</p></li>
+            </ol>
+
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Fase</th><th>Tiempo estimado</th><th>Producto</th></tr></thead>
+                <tbody>
+                  <tr><td>Contexto y diagnóstico</td><td>2 días</td><td>Ficha de contexto</td></tr>
+                  <tr><td>Diseño de entorno y rutina</td><td>2 días</td><td>Croquis + rutina visual</td></tr>
+                  <tr><td>Diseño de actividades</td><td>3 días</td><td>5 fichas de actividad</td></tr>
+                  <tr><td>Registro y autoevaluación</td><td>2 días</td><td>Instrumento + reflexión</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="box box-tip">
+              <strong>💡 Consejo para la entrega</strong>
+              <p>Antes de entregar, léelo como si fueras otra persona: ¿podría aplicar tu plan sin preguntarte nada? Si la respuesta es sí, está listo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <p class="hint">Marca este módulo cuando hayas revisado todas sus secciones.</p>
+        <button class="btn btn-primary js-complete">Marcar módulo como completado</button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MÓDULO 5
+         ============================================================ -->
+    <section class="module" id="modulo-5">
+      <div class="module-head">
+        <span class="module-badge">Módulo 5</span>
+        <h2>Recursos Adicionales y Cierre</h2>
+        <p class="module-sub">Resumen, glosario ampliado y checklists descargables para llevar tu práctica al día a día.</p>
+      </div>
+
+      <div class="module-body">
+        <div class="illus">
+          <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración de una pila de libros y un birrete de graduación">
+            <defs>
+              <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#86efac"/><stop offset="1" stop-color="#047857"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="210" fill="url(#g5)"/>
+            <circle cx="556" cy="48" r="30" fill="#ffffff" opacity=".22"/>
+            <!-- Libros -->
+            <rect x="220" y="150" width="200" height="30" rx="8" fill="#ffffff" opacity=".95"/>
+            <rect x="236" y="118" width="168" height="30" rx="8" fill="#fde68a"/>
+            <rect x="252" y="86" width="136" height="30" rx="8" fill="#ffffff" opacity=".85"/>
+            <!-- Birrete -->
+            <g transform="translate(320,58)">
+              <path d="M-62 8 L0 -22 L62 8 L0 38 Z" fill="#0f172a"/>
+              <rect x="-30" y="14" width="60" height="20" rx="6" fill="#1e293b"/>
+              <line x1="62" y1="8" x2="62" y2="42" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="62" cy="46" r="7" fill="#fbbf24"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 5.1 -->
+        <div class="acc-item open">
+          <button class="acc-head"><span class="acc-num">5.1</span> Resumen de aprendizajes clave <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="grid grid-2">
+              <div class="card"><h4><span class="ico">1</span> El bienestar es la base</h4><p>Sin seguridad emocional no hay atención sostenida ni aprendizaje profundo. Primero se regula, después se enseña.</p></div>
+              <div class="card"><h4><span class="ico">2</span> Cuidar es enseñar</h4><p>Comer, vestirse, ordenar o esperar turno son contenidos educativos de primer orden.</p></div>
+              <div class="card"><h4><span class="ico">3</span> El entorno trabaja por ti</h4><p>Un espacio bien diseñado reduce conflictos y aumenta la autonomía sin esfuerzo del adulto.</p></div>
+              <div class="card"><h4><span class="ico">4</span> Observar antes de actuar</h4><p>El registro sistemático convierte intuiciones en decisiones fundamentadas.</p></div>
+              <div class="card"><h4><span class="ico">5</span> Coherencia entre adultos</h4><p>Familia y escuela con pautas alineadas multiplican el impacto de cualquier intervención.</p></div>
+              <div class="card"><h4><span class="ico">6</span> Detectar a tiempo protege</h4><p>Reconocer señales de alerta y activar protocolos es parte del cuidado profesional.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.2 -->
+        <div class="acc-item" id="glosario">
+          <button class="acc-head"><span class="acc-num">5.2</span> Glosario ampliado de términos <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Término</th><th>Definición</th></tr></thead>
+                <tbody>
+                  <tr><td class="glossary-term">Adaptación (periodo de)</td><td>Fase inicial en la que el niño se familiariza con un nuevo entorno, personas y rutinas; puede incluir llanto, retrocesos temporales y cambios de apetito o sueño.</td></tr>
+                  <tr><td class="glossary-term">Ambiente preparado</td><td>Espacio organizado intencionalmente para que el niño pueda actuar con autonomía, orden, seguridad y belleza. Concepto central del enfoque Montessori.</td></tr>
+                  <tr><td class="glossary-term">Andamiaje</td><td>Apoyo temporal y ajustado que da el adulto para que el niño resuelva una tarea que aún no domina; se retira progresivamente.</td></tr>
+                  <tr><td class="glossary-term">Apego</td><td>Vínculo emocional duradero entre el niño y sus figuras cuidadoras principales; su calidad influye en la seguridad emocional futura.</td></tr>
+                  <tr><td class="glossary-term">Autorregulación</td><td>Capacidad de gestionar las propias emociones, impulsos y atención en función del contexto.</td></tr>
+                  <tr><td class="glossary-term">Autonomía</td><td>Capacidad de realizar por sí mismo tareas adecuadas a la edad, sin ayuda innecesaria del adulto.</td></tr>
+                  <tr><td class="glossary-term">Bienestar</td><td>Estado integral de equilibrio físico, emocional, social y cognitivo que permite al niño explorar y aprender.</td></tr>
+                  <tr><td class="glossary-term">Conducta observable</td><td>Acción concreta, visible y medible de un niño, descrita sin interpretaciones ni juicios de valor.</td></tr>
+                  <tr><td class="glossary-term">Corresponsabilidad</td><td>Responsabilidad compartida entre familia, escuela y comunidad sobre el cuidado y la educación del niño.</td></tr>
+                  <tr><td class="glossary-term">Desarrollo cognitivo</td><td>Evolución de las capacidades de pensamiento: atención, memoria, razonamiento, resolución de problemas y lenguaje.</td></tr>
+                  <tr><td class="glossary-term">Desarrollo integral</td><td>Progreso articulado de todas las dimensiones de la persona: física, cognitiva, lingüística, social y emocional.</td></tr>
+                  <tr><td class="glossary-term">Disciplina positiva</td><td>Enfoque educativo que combina firmeza en los límites con amabilidad en el trato, buscando soluciones en lugar de castigos.</td></tr>
+                  <tr><td class="glossary-term">Empatía</td><td>Capacidad de comprender y responder a la experiencia emocional de otra persona.</td></tr>
+                  <tr><td class="glossary-term">Estimulación temprana</td><td>Conjunto de acciones intencionadas que favorecen el desarrollo en las primeras etapas mediante juego, movimiento y lenguaje.</td></tr>
+                  <tr><td class="glossary-term">Hito del desarrollo</td><td>Habilidad esperable en un rango de edad determinado (por ejemplo, caminar entre los 12 y 18 meses). Son referencias, no exámenes.</td></tr>
+                  <tr><td class="glossary-term">Inteligencia emocional</td><td>Conjunto de habilidades para reconocer, comprender y regular las emociones propias y ajenas.</td></tr>
+                  <tr><td class="glossary-term">Juego simbólico</td><td>Juego en el que el niño representa situaciones y roles imaginarios; es clave para el lenguaje, la socialización y la autorregulación.</td></tr>
+                  <tr><td class="glossary-term">Motricidad fina</td><td>Coordinación de movimientos pequeños y precisos, especialmente de manos y dedos.</td></tr>
+                  <tr><td class="glossary-term">Motricidad gruesa</td><td>Coordinación de movimientos amplios que implican el cuerpo completo: correr, saltar, trepar, equilibrarse.</td></tr>
+                  <tr><td class="glossary-term">Neuroplasticidad</td><td>Capacidad del cerebro de reorganizarse y crear nuevas conexiones a partir de la experiencia. Es máxima en la infancia.</td></tr>
+                  <tr><td class="glossary-term">Pautas de crianza</td><td>Estilos y normas con las que los adultos acompañan el desarrollo del niño en el hogar.</td></tr>
+                  <tr><td class="glossary-term">Refuerzo positivo</td><td>Reconocimiento específico de una conducta deseada para favorecer su repetición.</td></tr>
+                  <tr><td class="glossary-term">Resiliencia</td><td>Capacidad de adaptarse y recuperarse frente a la adversidad, apoyada en vínculos seguros y recursos personales.</td></tr>
+                  <tr><td class="glossary-term">Rincón de la calma</td><td>Espacio blando y tranquilo donde el niño puede autorregularse voluntariamente; nunca debe usarse como castigo.</td></tr>
+                  <tr><td class="glossary-term">Rutina</td><td>Secuencia estable de actividades diarias que aporta previsibilidad y seguridad emocional.</td></tr>
+                  <tr><td class="glossary-term">Señal de alerta</td><td>Indicador observable que sugiere una dificultad en el desarrollo o una situación de riesgo y que requiere atención profesional.</td></tr>
+                  <tr><td class="glossary-term">Socioemocional</td><td>Dimensión que integra las habilidades sociales y la gestión emocional.</td></tr>
+                  <tr><td class="glossary-term">Tiempo de pantalla</td><td>Horas de exposición a dispositivos digitales; debe limitarse y acompañarse según la edad.</td></tr>
+                  <tr><td class="glossary-term">Transición</td><td>Momento de cambio entre una actividad y otra; suele ser el punto de mayor conflicto si no se anticipa.</td></tr>
+                  <tr><td class="glossary-term">Zona de Desarrollo Próximo</td><td>Distancia entre lo que el niño puede hacer solo y lo que puede lograr con ayuda de un adulto o un par más capaz.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.3 -->
+        <div class="acc-item" id="checklists">
+          <button class="acc-head"><span class="acc-num">5.3</span> Checklists descargables de repaso final <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="box box-info">
+              <strong>ℹ️ Cómo usarlas</strong>
+              <p>Marca cada casilla a medida que la verificas. Al final puedes descargar tus listas en formato de texto para imprimirlas o compartirlas con tu equipo.</p>
+            </div>
+
+            <div class="checklist-head">
+              <h4 style="margin:0;font-size:.95rem">🌅 Checklist 1 · Antes de la jornada</h4>
+              <span class="counter js-count">0 / 8</span>
+            </div>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>El espacio está ordenado, limpio y libre de riesgos (cables, objetos pequeños, esquinas).</span></li>
+              <li><input type="checkbox"><span>Las zonas están delimitadas y con su material correspondiente.</span></li>
+              <li><input type="checkbox"><span>El tablero de rutinas del día está visible y actualizado.</span></li>
+              <li><input type="checkbox"><span>El rincón de la calma está disponible, con cojín y tarjetas de emociones.</span></li>
+              <li><input type="checkbox"><span>Los materiales del día están a la altura de los niños.</span></li>
+              <li><input type="checkbox"><span>El botiquín está completo y accesible solo para adultos.</span></li>
+              <li><input type="checkbox"><span>Hay agua disponible y se conocen alergias o condiciones médicas del grupo.</span></li>
+              <li><input type="checkbox"><span>El equipo adulto ha acordado los roles y las normas comunes del día.</span></li>
+            </ul>
+
+            <div class="checklist-head" style="margin-top:26px">
+              <h4 style="margin:0;font-size:.95rem">☀️ Checklist 2 · Durante la jornada</h4>
+              <span class="counter js-count">0 / 8</span>
+            </div>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>Cada niño ha recibido un saludo personalizado con su nombre.</span></li>
+              <li><input type="checkbox"><span>Las transiciones se han anticipado con avisos de 5 y 2 minutos.</span></li>
+              <li><input type="checkbox"><span>Se ha nombrado al menos una emoción de forma explícita durante el día.</span></li>
+              <li><input type="checkbox"><span>Se ha permitido que los niños resuelvan por sí mismos lo que ya pueden hacer.</span></li>
+              <li><input type="checkbox"><span>Se han respetado los turnos de palabra y los ritmos individuales.</span></li>
+              <li><input type="checkbox"><span>Las instrucciones se han dado a la altura de los ojos y en positivo.</span></li>
+              <li><input type="checkbox"><span>Se ha registrado alguna observación relevante en el cuaderno de seguimiento.</span></li>
+              <li><input type="checkbox"><span>Ningún niño ha quedado excluido del juego o de la actividad grupal.</span></li>
+            </ul>
+
+            <div class="checklist-head" style="margin-top:26px">
+              <h4 style="margin:0;font-size:.95rem">🌙 Checklist 3 · Cierre del día</h4>
+              <span class="counter js-count">0 / 7</span>
+            </div>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>Se ha realizado una despedida tranquila y personalizada con cada niño.</span></li>
+              <li><input type="checkbox"><span>Se ha compartido con las familias al menos un logro del día.</span></li>
+              <li><input type="checkbox"><span>El espacio ha quedado ordenado y preparado para el día siguiente.</span></li>
+              <li><input type="checkbox"><span>Los materiales que perdieron interés se han rotado.</span></li>
+              <li><input type="checkbox"><span>Se ha revisado el registro por si hay señales de alerta que reportar.</span></li>
+              <li><input type="checkbox"><span>Se ha anotado una idea de mejora para la jornada siguiente.</span></li>
+              <li><input type="checkbox"><span>El equipo ha tenido al menos 5 minutos de coordinación breve.</span></li>
+            </ul>
+
+            <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-primary" id="downloadChecklist">⬇ Descargar mis checklists</button>
+              <button class="btn btn-outline" id="resetChecklist">↺ Reiniciar casillas</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.4 -->
+        <div class="acc-item">
+          <button class="acc-head"><span class="acc-num">5.4</span> Cierre del curso <span class="chev">▾</span></button>
+          <div class="acc-body">
+            <div class="closing">
+              <h3>¡Felicidades por completar el recorrido!</h3>
+              <p>Cuidar con enfoque de bienestar y aprendizaje no exige recursos extraordinarios: exige mirada atenta, decisiones coherentes y constancia. Cada pequeño ajuste que hagas mañana en tu espacio o en tu forma de acompañar ya es parte de este cambio.</p>
+              <p><strong>El siguiente paso no es leer más: es aplicar una sola cosa esta semana.</strong></p>
+            </div>
+
+            <div class="box box-tip" style="margin-top:22px">
+              <strong>💡 Tu compromiso de acción</strong>
+              <p>Escribe una acción concreta que aplicarás en los próximos 7 días, con fecha y forma de verificarla. Una sola. Sostenida en el tiempo vale más que diez ideas sin ejecutar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <p class="hint">Marca este módulo cuando hayas revisado todas sus secciones.</p>
+        <button class="btn btn-primary js-complete">Marcar módulo como completado</button>
+      </div>
+    </section>
+
+    <p class="footer">Curso · Cuidado de niños en edad preescolar y escolar con enfoque en bienestar y aprendizaje<br>Diseño instruccional y desarrollo web · Material formativo de uso educativo</p>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   1. NAVEGACIÓN LATERAL (MÓVIL)
+   ============================================================ */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const hamburger = document.getElementById('hamburger');
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', closeSidebar);
+
+function closeSidebar(){
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 1024) closeSidebar();
+  });
+});
+
+/* ============================================================
+   2. ACORDEONES (COLAPSAR / DESPLEGAR)
+   ============================================================ */
+document.querySelectorAll('.acc-head').forEach(head => {
+  head.addEventListener('click', () => {
+    head.closest('.acc-item').classList.toggle('open');
+  });
+});
+
+document.getElementById('expandAll').addEventListener('click', () => {
+  document.querySelectorAll('.acc-item').forEach(i => i.classList.add('open'));
+});
+
+document.getElementById('collapseAll').addEventListener('click', () => {
+  document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+});
+
+/* ============================================================
+   3. PROGRESO DE MÓDULOS (CON LOCALSTORAGE)
+   ============================================================ */
+const STORAGE_KEY = 'curso_cuidado_infantil_progreso_v1';
+const TOTAL_MODULOS = 5;
+let progreso = {};
+
+try {
+  progreso = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+} catch (e) {
+  progreso = {};
+}
+
+function guardarProgreso(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progreso)); } catch(e){}
+}
+
+function renderProgreso(){
+  const completados = Object.values(progreso).filter(Boolean).length;
+  const pct = Math.round((completados / TOTAL_MODULOS) * 100);
+
+  document.querySelectorAll('.js-progress-fill').forEach(el => el.style.width = pct + '%');
+  document.querySelectorAll('.js-progress-text').forEach(el => {
+    el.textContent = completados + ' de ' + TOTAL_MODULOS + ' módulos completados (' + pct + '%)';
+  });
+
+  document.querySelectorAll('.module').forEach(sec => {
+    const id = sec.id;
+    const btn = sec.querySelector('.js-complete');
+    if (progreso[id]) {
+      sec.classList.add('completed');
+      btn.classList.add('btn-done');
+      btn.textContent = '✔ Módulo completado';
+    } else {
+      sec.classList.remove('completed');
+      btn.classList.remove('btn-done');
+      btn.textContent = 'Marcar módulo como completado';
+    }
+  });
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href.startsWith('#modulo-')) {
+      link.classList.toggle('done', !!progreso[href.slice(1)]);
+    }
+  });
+}
+
+document.querySelectorAll('.js-complete').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.closest('.module').id;
+    progreso[id] = !progreso[id];
+    guardarProgreso();
+    renderProgreso();
+  });
+});
+
+renderProgreso();
+
+/* ============================================================
+   4. RESALTADO DEL MÓDULO ACTIVO
+   ============================================================ */
+const secciones = Array.from(document.querySelectorAll('.module'));
+const tituloActual = document.getElementById('currentModule');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+      const nombre = entry.target.querySelector('h2');
+      const badge = entry.target.querySelector('.module-badge');
+      if (nombre && badge) {
+        tituloActual.textContent = badge.textContent + ' · ' + nombre.textContent;
+      }
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+secciones.forEach(s => observer.observe(s));
+
+/* ============================================================
+   5. CONTADORES DE CHECKLIST
+   ============================================================ */
+function actualizarContador(lista){
+  const cajas = lista.querySelectorAll('input[type=checkbox]');
+  const marcadas = Array.from(cajas).filter(c => c.checked).length;
+  const contenedor = lista.closest('.acc-body');
+  const contador = contenedor ? contenedor.querySelector('.js-count') : null;
+  if (contador) contador.textContent = marcadas + ' / ' + cajas.length;
+}
+
+document.querySelectorAll('.checklist').forEach(lista => {
+  lista.querySelectorAll('input[type=checkbox]').forEach(caja => {
+    caja.addEventListener('change', () => actualizarContador(lista));
+  });
+  actualizarContador(lista);
+});
+
+/* ============================================================
+   6. DESCARGAR CHECKLISTS
+   ============================================================ */
+document.getElementById('downloadChecklist').addEventListener('click', () => {
+  let texto = 'CHECKLISTS DE REPASO FINAL\n';
+  texto += 'Curso: Cuidado de niños en edad preescolar y escolar\n';
+  texto += 'Enfoque en bienestar y aprendizaje\n';
+  texto += '='.repeat(58) + '\n\n';
+
+  const bloques = document.querySelectorAll('#checklists .acc-body > .checklist-head');
+
+  bloques.forEach(head => {
+    const titulo = head.querySelector('h4').textContent.trim();
+    texto += '\n' + titulo.toUpperCase() + '\n';
+    texto += '-'.repeat(58) + '\n';
+
+    let lista = head.nextElementSibling;
+    while (lista && !lista.classList.contains('checklist')) {
+      lista = lista.nextElementSibling;
+    }
+    if (lista) {
+      lista.querySelectorAll('li').forEach(li => {
+        const marcado = li.querySelector('input').checked ? '[X]' : '[ ]';
+        texto += marcado + ' ' + li.querySelector('span').textContent.trim() + '\n';
+      });
+    }
+    texto += '\n';
+  });
+
+  texto += '='.repeat(58) + '\n';
+  texto += 'Generado el ' + new Date().toLocaleDateString('es-ES') + '\n';
+
+  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'checklists-cuidado-infantil.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+/* ============================================================
+   7. REINICIAR CHECKLISTS
+   ============================================================ */
+document.getElementById('resetChecklist').addEventListener('click', () => {
+  document.querySelectorAll('.checklist input[type=checkbox]').forEach(c => { c.checked = false; });
+  document.querySelectorAll('.checklist').forEach(lista => actualizarContador(lista));
+});
+</script>
+</body>
+</html>
